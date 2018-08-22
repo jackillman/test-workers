@@ -1,0 +1,24 @@
+<p>
+  home works!
+</p>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Birth</th>
+        <th scope="col">Position</th>
+        <th scope="col">Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let worker of workerList">
+        <th scope="row">{{worker.id}}</th>
+        <td>{{worker.name}}</td>
+        <td>{{worker.birth}}</td>
+        <td>{{worker.position}}</td>
+        <td>{{worker.salary}}</td>
+      </tr>
+
+    </tbody>
+  </table>

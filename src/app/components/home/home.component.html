@@ -9,16 +9,55 @@
         <th scope="col">Birth</th>
         <th scope="col">Position</th>
         <th scope="col">Salary</th>
+        <th scope="col" colspan="2">Actions</th>
       </tr>
     </thead>
+  
     <tbody>
-      <tr *ngFor="let worker of workerList">
+      <tr *ngFor="let worker of workersList">
         <th scope="row">{{worker.id}}</th>
         <td>{{worker.name}}</td>
         <td>{{worker.birth}}</td>
         <td>{{worker.position}}</td>
         <td>{{worker.salary}}</td>
+        <td > <p (click)="editWorker(worker)" style="cursor:pointer;display: inline;">EDIT</p> </td>
+        <td > <p (click)="deleteWorker(worker)" style="cursor:pointer;display: inline;">DELETE</p> </td>
       </tr>
 
     </tbody>
   </table>
+  <button (click)="openDialog()">click</button>
+  <button type="button" class="btn btn-primary" (click)="showModal()">Open a modal</button>
+<br><br>
+<pre class="card card-block card-header" *ngFor="let message of messages">{{message}}</pre>
+ 
+<div class="modal fade" bsModal #modal="bs-modal"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-events-name">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-events-name" class="modal-title pull-left">Modal</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="currentWorkerForEdit">
+          
+          <div class="form-group">
+              <input type="text" class="form-control" id="name" aria-describedby="neme" placeholder="edit name" [(ngModel)]="currentWorkerForEdit.name">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="edit birth" [(ngModel)]="currentWorkerForEdit.birth">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorkerForEdit.position">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" id="salary" aria-describedby="salary" placeholder="edit salary" [(ngModel)]="currentWorkerForEdit.salary">
+          </div>
+          <button (click)="saveEditWorker()">Save</button>
+        <!-- {{currentWorkerForEdit | json}} -->
+      </div>
+    </div>
+  </div>
+</div>

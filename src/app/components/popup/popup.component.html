@@ -1,11 +1,62 @@
-<p>
-  popup works!
-</p>
-<ol>
 
+<div class="mode-edit" *ngIf="mode == 'edit'">
+  <p>
+    Edit Worker
+    </p>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="edit name" [(ngModel)]="currentWorker.name" >
+    </div>
+    <div class="form-group">
+      <label for="name">Birth</label>
+      <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="edit birth" [(ngModel)]="currentWorker.birth">
+    </div>
+    <div class="form-group">
+      <label for="name">Position</label>
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorker.position">
+    </div>
+    <div class="form-group">
+      <label for="name">Salary</label>
+      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="edit salary" [(ngModel)]="currentWorker.salary"   name="salary" #salary="ngModel">
+      <!-- <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
+        Введите цифры
+      </div> -->
+    </div>
+    <button class="btn btn-primary mb-2" (click)="saveChanges()" [mat-dialog-close]="currentWorker" >Save changes</button>
+</div>
 
-      You chose: <i>{{data}}</i>
-   
-  </ol>
-  
-  
+<div class="mode-new" *ngIf="mode == 'create'">
+  <p>
+    Creating Worker
+    </p>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter name" [(ngModel)]="newWorker.name" >
+    </div>
+    <div class="form-group">
+      <label for="name">Birth</label>
+      <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="enter birth" [(ngModel)]="newWorker.birth">
+    </div>
+    <div class="form-group">
+      <label for="name">Position</label>
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="enter position" [(ngModel)]="newWorker.position">
+    </div>
+    <div class="form-group">
+      <label for="name">Salary</label>
+      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="enter salary" [(ngModel)]="newWorker.salary"   name="salary" #salary="ngModel">
+      <!-- <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
+        Введите цифры
+      </div> -->
+    </div>
+    <button class="btn btn-primary mb-2" (click)="create()" [mat-dialog-close]="newWorker" >Save new worker</button>
+</div>
+<div class="mode-delete" *ngIf="mode == 'delete'" >
+  <h4>Вы уверены что хотите удалить ?</h4>
+  <div class="btns-block" style="display: flex;justify-content: space-between;margin-top: 60px;">
+
+ 
+    <button class="btn btn-primary mb-2" (click)="delete()" [mat-dialog-close]="workerDelete" >Удалить</button>
+    <button class="btn btn-warning mb-2" (click)="onNoClick()" >Нет, передумал</button>
+  </div>
+</div>
+

@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkService } from '../../shared/services/work.service';
 import { WorkerModel } from '../../shared/models/worker';
-import { ModalDirective } from 'ngx-bootstrap';
 import { MatDialog } from '@angular/material';
 import { PopupComponent } from '../popup/popup.component';
 
@@ -17,39 +16,34 @@ export class HomeComponent implements OnInit {
   currentWorkerForEdit:WorkerModel
   ngOnInit() {
     this.workersList = this.workService.getAllWorkers()
-    console.log(this.workersList)
-  }
 
-  editWorker(worker){
-    this.currentWorkerForEdit = worker
-
-
-    // this.modal.show();
-    console.log(worker)
   }
 
   deleteWorker(worker){
-    let ind = this.workersList.indexOf(worker);
+    this.mode ="delete"
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '550px',
+       data: {worker:worker,mode: this.mode}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+      //  this.newWorker = result
+      //  this.newWorker.id =  
+       
+    let ind = this.workersList.indexOf(result);
     console.log()
     if(ind > -1){
       this.workersList.splice(ind,1);
+      this.workService.tolocalStorage(this.workersList)
     }
-  }
+      
+      console.log(result)
+    });
+    
 
-  // @ViewChild(ModalDirective) modal: ModalDirective;
-  // messages: string[];
- 
-  // showModal() {
-  //   this.messages = [];
-  //   this.modal.show();
-  // }
-  // handler(type: string, $event: ModalDirective) {
-  //   this.messages.push(
-  //     `event ${type} is fired${$event.dismissReason
-  //       ? ', dismissed by ' + $event.dismissReason
-  //       : ''}`
-  //   );
-  // }
+  }
 
   saveEditWorker(){
     for(let i in this.workersList){
@@ -58,18 +52,52 @@ export class HomeComponent implements OnInit {
         break;
       }
     }
+    this.workService.tolocalStorage(this.workersList)
    console.log(this.currentWorkerForEdit) 
   }
-  currentWorkerAfterEdit
-  openDialog(): void {
+  newWorker
+  createWorker(): void {
+    this.mode ="create"
+    let newWorker = new WorkerModel()
+    newWorker.id = this.workersList.length;
+    // this.currentWorkerForEdit = worker
     const dialogRef = this.dialog.open(PopupComponent, {
-      width: '250px',
-      data: this.currentWorkerForEdit
+      width: '550px',
+       data: {worker: newWorker, mode: this.mode}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.currentWorkerAfterEdit = result;
+      result.id = this.workersList.length
+      //  this.newWorker = result
+      //  this.newWorker.id =  
+       this.workersList.push(result)
+       this.workService.tolocalStorage(this.workersList)
+
+      
+      console.log(result)
+    });
+  }
+
+
+  mode:any
+  editWorker(worker): void {
+    this.mode ="edit"
+    // this.currentWorkerForEdit = worker
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '550px',
+       data: {worker: worker,mode: this.mode}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.currentWorkerForEdit = result
+
+      if(this.currentWorkerForEdit ){
+        this.saveEditWorker()
+      }
+      
+      console.log(result)
     });
   }
 }

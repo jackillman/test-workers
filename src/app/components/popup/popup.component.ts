@@ -14,7 +14,7 @@ export class PopupComponent implements OnInit {
   currentWorker;
   newWorker;
   workerDelete
-  mode
+  mode;
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {

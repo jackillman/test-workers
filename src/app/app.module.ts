@@ -11,6 +11,8 @@ import { FormsModule }   from '@angular/forms';
 import { MyMaterialModule } from './shared/material.module';
 import { PopupComponent } from './components/popup/popup.component';
 import { WorkService } from './shared/services/work.service';
+import { MatNativeDateModule } from '@angular/material';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { WorkService } from './shared/services/work.service';
     AppRoutingModule,
     ModalModule.forRoot(),FormsModule,
     BrowserAnimationsModule,
-    MyMaterialModule
+    MyMaterialModule,
+    BsDatepickerModule.forRoot()
     
   ],
   providers: [WorkService],

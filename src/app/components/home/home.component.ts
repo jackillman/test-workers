@@ -49,6 +49,13 @@ export class HomeComponent implements OnInit {
     for(let i in this.workersList){
       if( this.workersList[i].id == this.currentWorkerForEdit.id){
         this.workersList[i] = this.currentWorkerForEdit;
+        let dateObj = new Date(this.currentWorkerForEdit.birth);
+        let month = dateObj.getUTCMonth() + 1; //months from 1-12
+        let day = dateObj.getUTCDate();
+        let year = dateObj.getUTCFullYear();
+        
+        this.currentWorkerForEdit.birth = day + "-" + month + "-" + year;
+        console.log(this.currentWorkerForEdit.birth)
         break;
       }
     }

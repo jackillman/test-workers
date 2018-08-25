@@ -28,21 +28,15 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      
-      //  this.newWorker = result
-      //  this.newWorker.id =  
-       
-    let ind = this.workersList.indexOf(result);
-    console.log()
-    if(ind > -1){
-      this.workersList.splice(ind,1);
-      this.workService.tolocalStorage(this.workersList)
-    }
-      
-      console.log(result)
-    });
+      let ind = this.workersList.indexOf(result);
+      console.log()
+      if(ind > -1){
+        this.workersList.splice(ind,1);
+        this.workService.tolocalStorage(this.workersList)
+      }
+        console.log(result)
+      });
     
-
   }
 
   saveEditWorker(){
@@ -51,10 +45,9 @@ export class HomeComponent implements OnInit {
         this.workersList[i] = this.currentWorkerForEdit;
         let dateObj = new Date(this.currentWorkerForEdit.birth);
         let month = dateObj.getUTCMonth() + 1; //months from 1-12
-        let day = dateObj.getUTCDate();
+        let day = dateObj.getUTCDate() + 1;
         let year = dateObj.getUTCFullYear();
-        
-        this.currentWorkerForEdit.birth = day + "-" + month + "-" + year;
+        this.currentWorkerForEdit.birth = day + "/" + month + "/" + year;
         console.log(this.currentWorkerForEdit.birth)
         break;
       }
@@ -67,7 +60,6 @@ export class HomeComponent implements OnInit {
     this.mode ="create"
     let newWorker = new WorkerModel()
     newWorker.id = this.workersList.length;
-    // this.currentWorkerForEdit = worker
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '550px',
        data: {worker: newWorker, mode: this.mode}
@@ -79,17 +71,10 @@ export class HomeComponent implements OnInit {
       let month = dateObj.getUTCMonth() + 1; //months from 1-12
       let day = dateObj.getUTCDate();
       let year = dateObj.getUTCFullYear();
-      
-      result.birth = day + "-" + month + "-" + year;
-
+      result.birth = day + "/" + month + "/" + year;
       result.id = this.workersList.length
-      //  this.newWorker = result
-      //  this.newWorker.id =  
-       this.workersList.push(result)
-       this.workService.tolocalStorage(this.workersList)
-
-      
-      console.log(result)
+      this.workersList.push(result)
+      this.workService.tolocalStorage(this.workersList)
     });
   }
 
@@ -97,7 +82,6 @@ export class HomeComponent implements OnInit {
   mode:any
   editWorker(worker): void {
     this.mode ="edit"
-    // this.currentWorkerForEdit = worker
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '550px',
        data: {worker: worker,mode: this.mode}
@@ -110,7 +94,6 @@ export class HomeComponent implements OnInit {
       if(this.currentWorkerForEdit ){
         this.saveEditWorker()
       }
-      
       console.log(result)
     });
   }

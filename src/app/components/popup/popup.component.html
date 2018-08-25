@@ -5,34 +5,35 @@
     </p>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="edit name" [(ngModel)]="currentWorker.name" name="name" #name="ngModel" pattern="[A-Za-zА-Яа-яЁё]">
-        <!-- <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="edit name" [(ngModel)]="currentWorker.name" name="name" #name="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
            Введите только текст
-      </div> -->
+      </div>
     </div>
+ 
     <div class="form-group">
       <label for="name">Birth</label>
       <input type="text"
         placeholder="Datepicker"
         class="form-control"
-        bsDatepicker  [(ngModel)]="currentWorker.birth">
+        bsDatepicker  [(ngModel)]="currentWorker.birth" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required (bsValueChange)="onValueChange($event)">
     </div>
-
     <div class="form-group">
       <label for="name">Position</label>
-      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorker.position" #position="ngModel" pattern="[A-Za-zА-Яа-яЁё]">
-      <!-- <div [hidden]="position.valid || position.untouched" class="alert alert-danger">
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorker.position" #position="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+      <div [hidden]="position.valid || position.untouched" class="alert alert-danger">
         Введите только текст
-      </div> -->
+      </div>
     </div>
     <div class="form-group">
       <label for="name">Salary</label>
-      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="edit salary" [(ngModel)]="currentWorker.salary"   name="salary" #salary="ngModel">
-      <!-- <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
+      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="edit salary" [(ngModel)]="currentWorker.salary"   name="salary" #salary="ngModel" pattern="[0-9]{1,20}" required>
+      <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
         Введите цифры
-      </div> -->
+      </div>
     </div>
-    <button class="btn btn-primary mb-2" (click)="saveChanges()" [mat-dialog-close]="currentWorker" >Save changes</button>
+
+    <button class="btn btn-primary mb-2" (click)="saveChanges()" [disabled]="name.invalid || position.invalid">Save changes</button>
 </div>
 
 <div class="mode-new" *ngIf="mode == 'create'">
@@ -41,28 +42,38 @@
     </p>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter name" [(ngModel)]="newWorker.name" >
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter name" [(ngModel)]="newWorker.name" name="name" #name="ngModel" pattern="^[А-Яа-яЁё\s]+$">
+      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+        Введите текст
+      </div>
     </div>
     <div class="form-group">
       <label for="name">Birth</label>
-      <!-- <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="enter birth" [(ngModel)]="newWorker.birth"> -->
       <input type="text"
       placeholder="Datepicker"
       class="form-control"
-      bsDatepicker  [(ngModel)]="newWorker.birth">
+      bsDatepicker  [(ngModel)]="newWorker.birth" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }" required #date="ngModel">
+      <div [hidden]="date.valid || date.untouched" class="alert alert-danger">
+        Введите дату
+      </div>
+
     </div>
     <div class="form-group">
       <label for="name">Position</label>
-      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="enter position" [(ngModel)]="newWorker.position">
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="enter position" [(ngModel)]="newWorker.position" name="position" #position="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+      <div [hidden]="position.valid || position.untouched" class="alert alert-danger">
+        Введите текст
+      </div>
     </div>
+
     <div class="form-group">
       <label for="name">Salary</label>
-      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="enter salary" [(ngModel)]="newWorker.salary"   name="salary" #salary="ngModel">
-      <!-- <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
+      <input  class="form-control" id="salary" aria-describedby="salary" placeholder="enter salary" [(ngModel)]="newWorker.salary"   name="salary" #salary="ngModel" pattern="[0-9]{1,20}" required>
+      <div [hidden]="salary.valid || salary.untouched" class="alert alert-danger">
         Введите цифры
-      </div> -->
+      </div>
     </div>
-    <button class="btn btn-primary mb-2" (click)="create()" [mat-dialog-close]="newWorker" >Save new worker</button>
+    <button class="btn btn-primary mb-2" (click)="create()" [disabled]="name.invalid || position.invalid || salary.invalid || date.invalid" >Save new worker</button>
 </div>
 <div class="mode-delete" *ngIf="mode == 'delete'" >
   <h4>Вы уверены что хотите удалить ?</h4>

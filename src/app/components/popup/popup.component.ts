@@ -15,10 +15,13 @@ export class PopupComponent implements OnInit {
   newWorker;
   workerDelete
   mode;
+  onValueChange(e){
+    console.log(e)
+  }
   constructor(
     public dialogRef: MatDialogRef<PopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
+      console.log(data)
       if(data.mode =="edit"){
         this.currentWorker  = new WorkerModel();
         this.currentWorker.id = data.worker.id
@@ -39,6 +42,8 @@ export class PopupComponent implements OnInit {
   
     curWorker
     saveChanges(){
+      console.log(this.currentWorker.birth)
+      this.dialogRef.close(this.currentWorker)
       console.log( this.currentWorker)
     }
     delete(){
@@ -47,7 +52,9 @@ export class PopupComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+ 
   create(){
+    this.dialogRef.close(this.newWorker)
     console.log(this.newWorker)
   }
 

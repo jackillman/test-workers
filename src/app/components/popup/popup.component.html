@@ -5,7 +5,7 @@
     </p>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="edit name" [(ngModel)]="currentWorker.name" name="name" #name="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="edit name" [(ngModel)]="currentWorker.name" name="name" #name="ngModel" pattern="^[A-Za-zА-Яа-яЁё\s]+$" required>
         <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
            Введите только текст
       </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <label for="name">Position</label>
-      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorker.position" #position="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="edit position" [(ngModel)]="currentWorker.position" #position="ngModel" pattern="^[A-Za-zА-Яа-яЁё\s]+$" required>
       <div [hidden]="position.valid || position.untouched" class="alert alert-danger">
         Введите только текст
       </div>
@@ -42,7 +42,7 @@
     </p>
     <div class="form-group">
       <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter name" [(ngModel)]="newWorker.name" name="name" #name="ngModel" pattern="^[А-Яа-яЁё\s]+$">
+      <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter name" [(ngModel)]="newWorker.name" name="name" #name="ngModel" pattern="^[A-Za-zА-Яа-яЁё\s]+$">
       <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
         Введите текст
       </div>
@@ -60,7 +60,7 @@
     </div>
     <div class="form-group">
       <label for="name">Position</label>
-      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="enter position" [(ngModel)]="newWorker.position" name="position" #position="ngModel" pattern="^[А-Яа-яЁё\s]+$" required>
+      <input type="text" class="form-control" id="position" aria-describedby="position" placeholder="enter position" [(ngModel)]="newWorker.position" name="position" #position="ngModel" pattern="^[A-Za-zА-Яа-яЁё\s]+$" required>
       <div [hidden]="position.valid || position.untouched" class="alert alert-danger">
         Введите текст
       </div>

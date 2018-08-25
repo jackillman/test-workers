@@ -11,8 +11,8 @@ import { FormsModule }   from '@angular/forms';
 import { MyMaterialModule } from './shared/material.module';
 import { PopupComponent } from './components/popup/popup.component';
 import { WorkService } from './shared/services/work.service';
-import { MatNativeDateModule } from '@angular/material';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +27,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ModalModule.forRoot(),FormsModule,
     BrowserAnimationsModule,
     MyMaterialModule,
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgxPaginationModule
     
   ],
   providers: [WorkService],

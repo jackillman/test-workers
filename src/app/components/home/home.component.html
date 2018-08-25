@@ -12,7 +12,7 @@
     </thead>
   
     <tbody>
-      <tr *ngFor="let worker of workersList">
+      <tr *ngFor="let worker of workersList | paginate: { itemsPerPage: 5, currentPage: page }">
         <th scope="row">{{worker.id}}</th>
         <td>{{worker.name}}</td>
         <td>{{worker.birth}}</td>
@@ -23,7 +23,9 @@
       </tr>
 
     </tbody>
+    
   </table>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
   <button type="button" class="btn btn-primary" (click)="createWorker()">Create worker</button>
   <!-- <button (click)="openDialog()">click</button>
   <button type="button" class="btn btn-primary" (click)="showModal()">Open a modal</button> -->

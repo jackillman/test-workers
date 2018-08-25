@@ -12,19 +12,11 @@
     </div>
     <div class="form-group">
       <label for="name">Birth</label>
-      <!-- <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="edit birth" [(ngModel)]="currentWorker.birth"> -->
       <input type="text"
         placeholder="Datepicker"
         class="form-control"
-        bsDatepicker  [(ngModel)]="currentWorker.birth" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }">
+        bsDatepicker  [(ngModel)]="currentWorker.birth">
     </div>
-<!-- 
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field> -->
-
 
     <div class="form-group">
       <label for="name">Position</label>
@@ -53,7 +45,11 @@
     </div>
     <div class="form-group">
       <label for="name">Birth</label>
-      <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="enter birth" [(ngModel)]="newWorker.birth">
+      <!-- <input type="text" class="form-control" id="birth" aria-describedby="birth" placeholder="enter birth" [(ngModel)]="newWorker.birth"> -->
+      <input type="text"
+      placeholder="Datepicker"
+      class="form-control"
+      bsDatepicker  [(ngModel)]="newWorker.birth">
     </div>
     <div class="form-group">
       <label for="name">Position</label>

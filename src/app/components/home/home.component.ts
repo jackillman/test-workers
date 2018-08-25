@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.workersList = this.workService.getAllWorkers()
 
   }
-
+  page: number = 1;
   deleteWorker(worker){
     this.mode ="delete"
     const dialogRef = this.dialog.open(PopupComponent, {
@@ -75,6 +75,13 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      let dateObj = new Date(result.birth);
+      let month = dateObj.getUTCMonth() + 1; //months from 1-12
+      let day = dateObj.getUTCDate();
+      let year = dateObj.getUTCFullYear();
+      
+      result.birth = day + "-" + month + "-" + year;
+
       result.id = this.workersList.length
       //  this.newWorker = result
       //  this.newWorker.id =  

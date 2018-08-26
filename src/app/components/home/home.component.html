@@ -1,4 +1,10 @@
 
+  <div class="form-group">
+    <label for="name">Search</label>
+    <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="enter" [(ngModel)]="search">
+  </div>
+  
+
 <table class="table">
     <thead>
       <tr>
@@ -12,7 +18,7 @@
     </thead>
   
     <tbody>
-      <tr *ngFor="let worker of workersList | paginate: { itemsPerPage: 5, currentPage: page }">
+      <tr *ngFor="let worker of workersList | paginate: { itemsPerPage: 5, currentPage: page } | myFilter:search ">
         <!-- <th scope="row">{{worker.id}}</th> -->
         <td>{{worker.name}}</td>
         <td>{{worker.birth}}</td>

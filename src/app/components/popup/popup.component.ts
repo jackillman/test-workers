@@ -15,6 +15,7 @@ export class PopupComponent implements OnInit {
   newWorker;
   workerDelete
   mode;
+  curWorker;
   onValueChange(e){
     console.log(e)
   }
@@ -24,11 +25,13 @@ export class PopupComponent implements OnInit {
       console.log(data)
       if(data.mode =="edit"){
         this.currentWorker  = new WorkerModel();
+        console.log(data.worker.birth)
         this.currentWorker.id = data.worker.id
         this.currentWorker.name = data.worker.name
         this.currentWorker.birth = data.worker.birth
         this.currentWorker.position = data.worker.position
         this.currentWorker.salary = data.worker.salary;
+        console.log(this.currentWorker.birth)
       } else if (data.mode == "create"){
 
         this.newWorker = data.worker
@@ -40,8 +43,15 @@ export class PopupComponent implements OnInit {
       this.mode = data.mode
     }
   
-    curWorker
+    
     saveChanges(){
+      console.log(this.currentWorker.birth)
+      let dateObj = new Date(this.currentWorker.birth);
+      let month = dateObj.getUTCMonth() + 1; //months from 1-12
+      let day = dateObj.getUTCDate() + 1;
+      let year = dateObj.getUTCFullYear();
+      console.log(month)
+  //    this.currentWorker.birth = day + "/" + month + "/" + year;
       console.log(this.currentWorker.birth)
       this.dialogRef.close(this.currentWorker)
       console.log( this.currentWorker)

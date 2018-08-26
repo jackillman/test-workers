@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private workService: WorkService,public dialog: MatDialog) { }
   workersList:WorkerModel[]=[];
-  currentWorkerForEdit:WorkerModel
+  currentWorkerForEdit:WorkerModel;
+  search:string;
   ngOnInit() {
     this.workersList = this.workService.getAllWorkers()
 
@@ -43,12 +44,7 @@ export class HomeComponent implements OnInit {
     for(let i in this.workersList){
       if( this.workersList[i].id == this.currentWorkerForEdit.id){
         this.workersList[i] = this.currentWorkerForEdit;
-        let dateObj = new Date(this.currentWorkerForEdit.birth);
-        let month = dateObj.getUTCMonth() + 1; //months from 1-12
-        let day = dateObj.getUTCDate() + 1;
-        let year = dateObj.getUTCFullYear();
-        this.currentWorkerForEdit.birth = day + "/" + month + "/" + year;
-        console.log(this.currentWorkerForEdit.birth)
+
         break;
       }
     }
@@ -89,6 +85,11 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      let dateObj = new Date(result.birth);
+      let month = dateObj.getUTCMonth() + 1; //months from 1-12
+      let day = dateObj.getUTCDate() + 1;
+      let year = dateObj.getUTCFullYear();
+      result.birth = day + "/" + month + "/" + year;
       this.currentWorkerForEdit = result
 
       if(this.currentWorkerForEdit ){

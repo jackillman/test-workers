@@ -14,12 +14,15 @@ export class HomeComponent implements OnInit {
   constructor(private workService: WorkService,public dialog: MatDialog) { }
   workersList:WorkerModel[]=[];
   currentWorkerForEdit:WorkerModel;
+  newWorker:WorkerModel;
   search:string;
+  mode:any;
+  page: number = 1;
+
   ngOnInit() {
     this.workersList = this.workService.getAllWorkers()
-
   }
-  page: number = 1;
+ 
   deleteWorker(worker){
     this.mode ="delete"
     const dialogRef = this.dialog.open(PopupComponent, {
@@ -35,23 +38,20 @@ export class HomeComponent implements OnInit {
         this.workersList.splice(ind,1);
         this.workService.tolocalStorage(this.workersList)
       }
-        console.log(result)
-      });
-    
+    }); 
   }
 
   saveEditWorker(){
     for(let i in this.workersList){
       if( this.workersList[i].id == this.currentWorkerForEdit.id){
         this.workersList[i] = this.currentWorkerForEdit;
-
         break;
       }
     }
     this.workService.tolocalStorage(this.workersList)
-   console.log(this.currentWorkerForEdit) 
   }
-  newWorker
+
+
   createWorker(): void {
     this.mode ="create"
     let newWorker = new WorkerModel()
@@ -68,14 +68,14 @@ export class HomeComponent implements OnInit {
       let day = dateObj.getUTCDate();
       let year = dateObj.getUTCFullYear();
       result.birth = day + "/" + month + "/" + year;
-      result.id = this.workersList.length
+      result.id = this.workersList.length;
       this.workersList.push(result)
       this.workService.tolocalStorage(this.workersList)
     });
   }
 
 
-  mode:any
+  
   editWorker(worker): void {
     this.mode ="edit"
     const dialogRef = this.dialog.open(PopupComponent, {
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
       let day = dateObj.getUTCDate() + 1;
       let year = dateObj.getUTCFullYear();
       result.birth = day + "/" + month + "/" + year;
-      this.currentWorkerForEdit = result
+      this.currentWorkerForEdit = result;
 
       if(this.currentWorkerForEdit ){
         this.saveEditWorker()
@@ -98,4 +98,5 @@ export class HomeComponent implements OnInit {
       console.log(result)
     });
   }
+
 }

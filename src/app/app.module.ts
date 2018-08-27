@@ -7,12 +7,13 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HomeComponent } from './components/home/home.component';
 import { ModalModule } from 'ngx-bootstrap';
 import { FormsModule }   from '@angular/forms';
-import { MyMaterialModule } from './shared/material.module';
+import { MyMaterialModule } from './shared/modules/material.module';
 import { PopupComponent } from './components/popup/popup.component';
 import { WorkService } from './shared/services/work.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MyFilterPipe } from './pipes/my-filter.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,

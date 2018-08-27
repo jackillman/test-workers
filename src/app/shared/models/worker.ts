@@ -1,7 +1,7 @@
 export class WorkerModel {
     id:number;
     name: string;
-    birth: string;
+    birth: any;
     position:string;
     salary: number;
 }
